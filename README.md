@@ -1,6 +1,4 @@
-# misty
-
-Misty - a Flutter miniapp solution.
+# Misty - a Flutter miniapp solution.
 
 By intercepting browser network requests, reading local resource files, 
 reducing network resource requests, and improving the opening speed of web pages, 
@@ -8,10 +6,10 @@ a Flutter miniapp solution that interacts with Flutter's native gestures is real
 
 ## Project architecture design
 
-[] Web assets manager (Version manager, Assets download handle)
-[] WebView assets and web proxy (Assets local server)
-[] Gesture interaction
-[] Miniapp UI
+- [] Web assets manager (Version manager, Assets download handle)
+- [] WebView assets and web proxy (Assets local server)
+- [] Gesture interaction
+- [] Miniapp UI
 
 ## MIT License
 
