@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
-
-import 'package:flutter/services.dart';
-import 'package:misty/misty.dart';
+import 'package:misty/local_server_for_webview.dart';
+import 'package:misty/tools/local_server_binder.dart';
+import 'package:misty/tools/local_server_manager.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,35 +15,9 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String _platformVersion = 'Unknown';
-  final _mistyPlugin = Misty();
-
   @override
   void initState() {
     super.initState();
-    initPlatformState();
-  }
-
-  // Platform messages are asynchronous, so we initialize in an async method.
-  Future<void> initPlatformState() async {
-    String platformVersion;
-    // Platform messages may fail, so we use a try/catch PlatformException.
-    // We also handle the message potentially returning null.
-    try {
-      platformVersion =
-          await _mistyPlugin.getPlatformVersion() ?? 'Unknown platform version';
-    } on PlatformException {
-      platformVersion = 'Failed to get platform version.';
-    }
-
-    // If the widget was removed from the tree while the asynchronous platform
-    // message was in flight, we want to discard the reply rather than calling
-    // setState to update our non-existent appearance.
-    if (!mounted) return;
-
-    setState(() {
-      _platformVersion = platformVersion;
-    });
   }
 
   @override
@@ -52,12 +25,56 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Plugin example app'),
+          title: const Text('Misty app'),
+          centerTitle: true,
         ),
         body: Center(
-          child: Text('Running on: $_platformVersion\n'),
+          child: _openMistyView(),
         ),
       ),
     );
+  }
+
+  Widget _openMistyView() {
+    return ElevatedButton(
+      onPressed: () {},
+      child: const Text('打开小程序'),
+    );
+  }
+}
+
+class LocalServerWebViewManager extends LocalServerClientManager {
+  factory LocalServerWebViewManager() => _getInstance();
+
+  static LocalServerWebViewManager get instance => _getInstance();
+  static LocalServerWebViewManager? _instance;
+
+  static LocalServerWebViewManager _getInstance() {
+    _instance ??= LocalServerWebViewManager._internal();
+    return _instance!;
+  }
+
+  LocalServerWebViewManager._internal();
+
+  /// 测试的配置
+  void initSetting() {
+    init();
+    LocalServerCacheBinderSetting.instance
+        .setBaseHost('https://jomin-web.web.app');
+    Map<String, dynamic> baCache = {
+      'common': {'compress': '/local-server/common.zip', "version": "20220503"}
+    };
+    LocalServerClientConfig localServerClientConfig =
+        LocalServerClientConfig.fromJson({
+      'option': [
+        {'key': 'test-one', 'open': 1, 'priority': 0, "version": "20220503"}
+      ],
+      'assets': {
+        'test-one': {'compress': '/local-server/test-one.zip'}
+      },
+      'basics': baCache,
+    });
+    prepareManager(localServerClientConfig);
+    startLocalServer();
   }
 }
