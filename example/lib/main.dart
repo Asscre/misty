@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:misty/local_server_for_webview.dart';
-import 'package:misty/tools/local_server_binder.dart';
-import 'package:misty/tools/local_server_manager.dart';
+import 'package:misty/misty.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,6 +15,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   void initState() {
+    LocalServerWebViewManager.instance.initSetting();
     super.initState();
   }
 
@@ -37,7 +36,8 @@ class _MyAppState extends State<MyApp> {
 
   Widget _openMistyView() {
     return ElevatedButton(
-      onPressed: () {},
+      onPressed: () => Misty()
+          .openMisty(context, 'https://jomin-web.web.app/test-one/index.html'),
       child: const Text('打开小程序'),
     );
   }
