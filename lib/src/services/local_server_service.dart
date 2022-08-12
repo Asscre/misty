@@ -12,17 +12,11 @@ import 'package:path/path.dart';
 /// Http Server 服务
 /// @author jm
 class LocalServerService extends LocalServerServiceHandler {
-  factory LocalServerService() => _getInstance();
+  factory LocalServerService() => _instance ??= LocalServerService._();
 
-  static LocalServerService get instance => _getInstance();
   static LocalServerService? _instance;
 
-  static LocalServerService _getInstance() {
-    _instance ??= LocalServerService._internal();
-    return _instance!;
-  }
-
-  LocalServerService._internal();
+  LocalServerService._();
 
   /// 初始化配置
   /// 目录的加载
@@ -157,7 +151,7 @@ class LocalServerServiceHandler {
           } else {
             // 找不到本地文件，使用网络下载拿到原始数据
             var nowUri = request.requestedUri;
-            var baseDomain = LocalServerCacheBinderSetting.instance.baseDomain;
+            var baseDomain = LocalServerCacheBinderSetting().baseDomain;
             var baseUri = Uri.parse(baseDomain);
             // 替换为原始url
             nowUri = nowUri.replace(

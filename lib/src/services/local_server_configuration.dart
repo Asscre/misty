@@ -99,7 +99,7 @@ class LocalServerConfiguration {
       if (!downUrl.startsWith("/")) {
         downUrl = "/$downUrl";
       }
-      downUrl = LocalServerCacheBinderSetting.instance.baseDomain + downUrl;
+      downUrl = LocalServerCacheBinderSetting().baseDomain + downUrl;
     }
     return downUrl;
   }

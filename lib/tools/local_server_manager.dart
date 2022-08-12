@@ -27,9 +27,9 @@ class LocalServerClientManager
   }
 
   void startLocalServer([String? address, int? port]) =>
-      LocalServerService.instance.startServer(address, port);
+      LocalServerService().startServer(address, port);
 
-  void cancelLocalServer() => LocalServerService.instance.cancelServer();
+  void cancelLocalServer() => LocalServerService().cancelServer();
 
   void registerBuilder(LocalServerCacheBinder builder) => builders.add(builder);
 
@@ -38,15 +38,15 @@ class LocalServerClientManager
 
   void _invokeModule() async {
     LocalServerDownloadService().invoke(this);
-    LocalServerService.instance.invoke();
-    LocalServerService.instance.registerStatusObserve(this);
+    LocalServerService().invoke();
+    LocalServerService().registerStatusObserve(this);
   }
 
   void prepareManager(LocalServerClientConfig localServerClientConfig) async {
     loadStartTime = DateTime.now().millisecondsSinceEpoch;
     this.localServerClientConfig = localServerClientConfig;
     LocalServerConfiguration.getDistDirectory();
-    LocalServerCacheBinderSetting.instance.setConfig(localServerClientConfig);
+    LocalServerCacheBinderSetting().setConfig(localServerClientConfig);
   }
 
   void setWebViewErrorCode(int errorCode) {
@@ -133,7 +133,7 @@ class LocalServerClientManager
       }
     }
     basicCache = tmpBasicCache;
-    LocalServerCacheBinderSetting.instance.setBasicCache(basicCache);
+    LocalServerCacheBinderSetting().setBasicCache(basicCache);
     localServerClientConfig.basicIsDown = isSuc;
     _log(
         '结束Basic下载，用时: ${(DateTime.now().millisecondsSinceEpoch - loadStartTime) / 1000}');

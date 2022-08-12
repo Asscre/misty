@@ -95,7 +95,7 @@ class LocalServerClientConfig {
       // 触发预下载
       LocalServerDownloadService.instance
           .preloadBasicsData(json['basics'], basics, oldBasic);
-    });
+    },);
 
     Map<String, DownloadServiceTotalAssetItem> tmpAssets = {};
     for (var e in options) {
