@@ -15,66 +15,41 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   void initState() {
-    LocalServerWebViewManager.instance.initSetting();
+    Misty.start(
+      MistyStartModel(
+        compress: '/local-server/common.zip',
+        version: '20220503',
+        key: 'test-one',
+        baseHost: 'https://jomin-web.web.app',
+      ),
+    );
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Misty app'),
-          centerTitle: true,
-        ),
-        body: Center(
-          child: _openMistyView(),
-        ),
-      ),
+      home: Builder(builder: (context) {
+        return Scaffold(
+          appBar: AppBar(
+            title: const Text('Misty app'),
+            centerTitle: true,
+          ),
+          body: Center(
+            child: _openMistyView(context),
+          ),
+        );
+      }),
     );
   }
 
-  Widget _openMistyView() {
+  Widget _openMistyView(BuildContext context) {
     return ElevatedButton(
-      onPressed: () => Misty()
-          .openMisty(context, 'https://jomin-web.web.app/test-one/index.html'),
+      onPressed: () => Misty().openMisty(
+        context,
+        'https://jomin-web.web.app/test-one/index.html',
+      ),
       child: const Text('打开小程序'),
     );
-  }
-}
-
-class LocalServerWebViewManager extends LocalServerClientManager {
-  factory LocalServerWebViewManager() => _getInstance();
-
-  static LocalServerWebViewManager get instance => _getInstance();
-  static LocalServerWebViewManager? _instance;
-
-  static LocalServerWebViewManager _getInstance() {
-    _instance ??= LocalServerWebViewManager._internal();
-    return _instance!;
-  }
-
-  LocalServerWebViewManager._internal();
-
-  /// 测试的配置
-  void initSetting() {
-    init();
-    LocalServerCacheBinderSetting.instance
-        .setBaseHost('https://jomin-web.web.app');
-    Map<String, dynamic> baCache = {
-      'common': {'compress': '/local-server/common.zip', "version": "20220503"}
-    };
-    LocalServerClientConfig localServerClientConfig =
-        LocalServerClientConfig.fromJson({
-      'option': [
-        {'key': 'test-one', 'open': 1, 'priority': 0, "version": "20220503"}
-      ],
-      'assets': {
-        'test-one': {'compress': '/local-server/test-one.zip'}
-      },
-      'basics': baCache,
-    });
-    prepareManager(localServerClientConfig);
-    startLocalServer();
   }
 }

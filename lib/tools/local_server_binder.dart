@@ -11,17 +11,12 @@ abstract class LocalServerCacheBuilderProtocol {
 
 /// Local Server Binder的配置
 class LocalServerCacheBinderSetting {
-  factory LocalServerCacheBinderSetting() => _getInstance();
+  factory LocalServerCacheBinderSetting() =>
+      _instance ??= LocalServerCacheBinderSetting._();
 
-  static LocalServerCacheBinderSetting get instance => _getInstance();
   static LocalServerCacheBinderSetting? _instance;
 
-  LocalServerCacheBinderSetting._internal();
-
-  static LocalServerCacheBinderSetting _getInstance() {
-    _instance ??= LocalServerCacheBinderSetting._internal();
-    return _instance!;
-  }
+  LocalServerCacheBinderSetting._();
 
   LocalServerClientConfig? lsClientConfig;
   Map<String, dynamic>? basicCache;
@@ -49,14 +44,14 @@ class LocalServerCacheBinderSetting {
 /// 返回LocalServer服务对应path的url
 class LocalServerCacheBinder implements LocalServerCacheBuilderProtocol {
   LocalServerClientConfig? get lsClientConfig =>
-      LocalServerCacheBinderSetting.instance.lsClientConfig;
+      LocalServerCacheBinderSetting().lsClientConfig;
 
   Map<String, dynamic>? get basicCache =>
-      LocalServerCacheBinderSetting.instance.basicCache;
+      LocalServerCacheBinderSetting().basicCache;
 
   /// 当前webview是否被禁止使用server
   bool get unSupportLocalServer =>
-      LocalServerCacheBinderSetting.instance.unSupportLocalServer;
+      LocalServerCacheBinderSetting().unSupportLocalServer;
 
   Map<String, dynamic> assetsCache = {};
   bool isLocalServer = false;
@@ -64,11 +59,11 @@ class LocalServerCacheBinder implements LocalServerCacheBuilderProtocol {
   String currentH5Path = "";
 
   void initBinder() {
-    LocalServerService.instance.referenceCounter++;
+    LocalServerService().referenceCounter++;
   }
 
   void dispose() {
-    LocalServerService.instance.referenceCounter--;
+    LocalServerService().referenceCounter--;
   }
 
   @override
@@ -148,7 +143,7 @@ class LocalServerCacheBinder implements LocalServerCacheBuilderProtocol {
       return h5Path;
     }
     isLocalServer = true;
-    return LocalServerService.instance.getLocalServerWebUrl(
-        h5Path, query.isEmpty ? path : path + '?' + query);
+    return LocalServerService()
+        .getLocalServerWebUrl(h5Path, query.isEmpty ? path : '$path?$query');
   }
 }

@@ -233,8 +233,7 @@ class LocalServerDownloadService {
           .toList()
           .length;
       if (sucLen >=
-          (LocalServerCacheBinderSetting
-                  .instance.lsClientConfig?.basics.length ??
+          (LocalServerCacheBinderSetting().lsClientConfig?.basics.length ??
               1)) {
         // 保存记录
         await LocalServerConfigCache.setBasic(basicsBucket);
