@@ -17,10 +17,15 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     Misty.start(
       MistyStartModel(
-        compress: '/local-server/common.zip',
-        version: '20220503',
-        key: 'test-one',
-        baseHost: 'https://jomin-web.web.app',
+        compress: '/common.zip',
+        version: '20220814',
+        key: 'misty-app',
+        baseHost: 'https://mistyapp.oss-cn-hangzhou.aliyuncs.com',
+        assets: [
+          {
+            'misty-app': '/misty-app.zip',
+          },
+        ],
       ),
     );
     super.initState();
@@ -47,7 +52,7 @@ class _MyAppState extends State<MyApp> {
     return ElevatedButton(
       onPressed: () => Misty().openMisty(
         context,
-        'https://jomin-web.web.app/test-one/index.html',
+        'https://mistyapp.oss-cn-hangzhou.aliyuncs.com/misty-app/index.html',
       ),
       child: const Text('打开小程序'),
     );
