@@ -9,6 +9,9 @@ class MistyStartModel {
   /// 如果此版本号高于缓存版本，则触发更新
   String version;
 
+  /// 程序zip资源
+  List<Map<String, String>> assets;
+
   /// 资源唯一key，用于查找web程序资源，是该程序的root路径
   String key;
   int? open;
@@ -17,6 +20,7 @@ class MistyStartModel {
   MistyStartModel({
     required this.baseHost,
     required this.compress,
+    required this.assets,
     required this.version,
     required this.key,
     this.open = 1,

@@ -1,5 +1,3 @@
-import 'package:misty/src/model/misty_start_model.dart';
-
 import 'misty.dart';
 
 class MistyHandler extends LocalServerClientManager {
@@ -16,6 +14,16 @@ class MistyHandler extends LocalServerClientManager {
         'version': params.version,
       },
     };
+    Map<String, dynamic> assets = {};
+    params.assets
+        .map(
+      (e) => {
+        e.keys.first: {'compress': e.values.first},
+      },
+    )
+        .forEach((j) {
+      assets.addAll(j);
+    });
     LocalServerClientConfig localServerClientConfig =
         LocalServerClientConfig.fromJson({
       'option': [
@@ -26,11 +34,7 @@ class MistyHandler extends LocalServerClientManager {
           'version': params.version,
         },
       ],
-      'assets': {
-        params.key: {
-          'compress': params.compress,
-        },
-      },
+      'assets': assets,
       'basics': baCache,
     });
     prepareManager(localServerClientConfig);
