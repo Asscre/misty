@@ -4,11 +4,11 @@ import 'dart:io';
 import 'package:archive/archive.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:misty/src/model/download_service_item.dart';
-import 'package:misty/src/model/download_service_total_asset_item.dart';
-import 'package:misty/src/services/local_server_configuration.dart';
-import 'package:misty/tools/local_server_binder.dart';
-import 'package:misty/tools/local_server_config_cache.dart';
+import 'package:misty/local_server/src/model/download_service_item.dart';
+import 'package:misty/local_server/src/model/download_service_total_asset_item.dart';
+import 'package:misty/local_server/src/services/local_server_configuration.dart';
+import 'package:misty/local_server/tools/local_server_binder.dart';
+import 'package:misty/local_server/tools/local_server_config_cache.dart';
 import 'package:uuid/uuid.dart';
 
 abstract class LocalServerDownloadServiceProtocol {

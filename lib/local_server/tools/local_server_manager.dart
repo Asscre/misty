@@ -2,14 +2,14 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
-import 'package:misty/src/model/download_service_item.dart';
-import 'package:misty/src/model/local_server_client_config.dart';
-import 'package:misty/src/services/local_server_configuration.dart';
-import 'package:misty/src/services/local_server_service.dart';
-import 'package:misty/tools/local_server_binder.dart';
-import 'package:misty/tools/local_server_config_cache.dart';
-import 'package:misty/tools/local_server_downloader.dart';
-import 'package:misty/tools/local_server_status_handler.dart';
+import 'package:misty/local_server/src/model/download_service_item.dart';
+import 'package:misty/local_server/src/model/local_server_client_config.dart';
+import 'package:misty/local_server/src/services/local_server_configuration.dart';
+import 'package:misty/local_server/src/services/local_server_service.dart';
+import 'package:misty/local_server/tools/local_server_binder.dart';
+import 'package:misty/local_server/tools/local_server_config_cache.dart';
+import 'package:misty/local_server/tools/local_server_downloader.dart';
+import 'package:misty/local_server/tools/local_server_status_handler.dart';
 
 class LocalServerClientManager
     implements LocalServerStatusHandler, LocalServerDownloadServiceProtocol {
@@ -110,7 +110,7 @@ class LocalServerClientManager
 
   @override
   simpleAssetDownloadsFailure(DownloadServiceItem item, String errMsg) {
-    _log('[simpleAssetDownloadsFailure]' + errMsg);
+    _log('[simpleAssetDownloadsFailure]$errMsg');
   }
 
   @override

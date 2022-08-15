@@ -2,12 +2,12 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
-import 'package:misty/src/model/download_service_item.dart';
-import 'package:misty/src/model/download_service_total_asset_item.dart';
-import 'package:misty/src/model/local_server_client_config_item.dart';
-import 'package:misty/src/services/local_server_configuration.dart';
-import 'package:misty/tools/local_server_config_cache.dart';
-import 'package:misty/tools/local_server_downloader.dart';
+import 'package:misty/local_server/src/model/download_service_item.dart';
+import 'package:misty/local_server/src/model/download_service_total_asset_item.dart';
+import 'package:misty/local_server/src/model/local_server_client_config_item.dart';
+import 'package:misty/local_server/src/services/local_server_configuration.dart';
+import 'package:misty/local_server/tools/local_server_config_cache.dart';
+import 'package:misty/local_server/tools/local_server_downloader.dart';
 
 /// 解析config，并自动触发相应的下载任务
 class LocalServerClientConfig {
@@ -79,23 +79,25 @@ class LocalServerClientConfig {
       basics[key] = value as Map<String, dynamic>;
     });
     // 处理统一资源 Basic ，对比version，不一样的version则需要更新
-    LocalServerConfigCache.getBasic().then((value) {
-      List<DownloadServiceItem>? oldBasic = List.from(value ?? []);
-      // 版本不对，则移除，并需要下载
-      if (value?.isNotEmpty ?? false) {
-        for (DownloadServiceItem element in value!) {
-          var res = basics[element.h5Path];
-          if (res != null) {
-            if (res['version'] != element.version) {
-              oldBasic.removeWhere((e) => element.h5Path == e.h5Path);
+    LocalServerConfigCache.getBasic().then(
+      (value) {
+        List<DownloadServiceItem>? oldBasic = List.from(value ?? []);
+        // 版本不对，则移除，并需要下载
+        if (value?.isNotEmpty ?? false) {
+          for (DownloadServiceItem element in value!) {
+            var res = basics[element.h5Path];
+            if (res != null) {
+              if (res['version'] != element.version) {
+                oldBasic.removeWhere((e) => element.h5Path == e.h5Path);
+              }
             }
           }
         }
-      }
-      // 触发预下载
-      LocalServerDownloadService.instance
-          .preloadBasicsData(json['basics'], basics, oldBasic);
-    },);
+        // 触发预下载
+        LocalServerDownloadService.instance
+            .preloadBasicsData(json['basics'], basics, oldBasic);
+      },
+    );
 
     Map<String, DownloadServiceTotalAssetItem> tmpAssets = {};
     for (var e in options) {

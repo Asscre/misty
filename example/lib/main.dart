@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:misty/misty.dart';
+import 'package:misty_example/index_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,21 +14,41 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  MistyStartModel mistyStartOption = MistyStartModel(
+    baseHost: 'https://mistyapp.oss-cn-hangzhou.aliyuncs.com',
+    options: [
+      Option(
+        key: 'misty-app-one',
+        open: 1,
+        priority: 0,
+        version: '202208151731',
+      ),
+      Option(
+        key: 'misty-app-two',
+        open: 1,
+        priority: 0,
+        version: '202208151527',
+      ),
+    ],
+    basics: Basics(
+      common: Common(
+        compress: '/common.zip',
+        version: '202208151527',
+      ),
+    ),
+    assets: [
+      {
+        'misty-app-one': '/misty-app-one/misty-app.zip',
+      },
+      {
+        'misty-app-two': '/misty-app-two/misty-app.zip',
+      },
+    ],
+  );
+
   @override
   void initState() {
-    Misty.start(
-      MistyStartModel(
-        compress: '/common.zip',
-        version: '20220814',
-        key: 'misty-app',
-        baseHost: 'https://mistyapp.oss-cn-hangzhou.aliyuncs.com',
-        assets: [
-          {
-            'misty-app': '/misty-app.zip',
-          },
-        ],
-      ),
-    );
+    Misty.start(mistyStartOption);
     super.initState();
   }
 
@@ -35,26 +56,8 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Builder(builder: (context) {
-        return Scaffold(
-          appBar: AppBar(
-            title: const Text('Misty app'),
-            centerTitle: true,
-          ),
-          body: Center(
-            child: _openMistyView(context),
-          ),
-        );
+        return const IndexPage();
       }),
-    );
-  }
-
-  Widget _openMistyView(BuildContext context) {
-    return ElevatedButton(
-      onPressed: () => Misty().openMisty(
-        context,
-        'https://mistyapp.oss-cn-hangzhou.aliyuncs.com/misty-app/index.html',
-      ),
-      child: const Text('打开小程序'),
     );
   }
 }

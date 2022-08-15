@@ -1,9 +1,9 @@
 import 'dart:io';
 
-import 'package:misty/src/model/download_service_total_asset_item.dart';
-import 'package:misty/src/model/local_server_client_config.dart';
-import 'package:misty/src/services/local_server_configuration.dart';
-import 'package:misty/src/services/local_server_service.dart';
+import 'package:misty/local_server/src/model/download_service_total_asset_item.dart';
+import 'package:misty/local_server/src/model/local_server_client_config.dart';
+import 'package:misty/local_server/src/services/local_server_configuration.dart';
+import 'package:misty/local_server/src/services/local_server_service.dart';
 
 abstract class LocalServerCacheBuilderProtocol {
   dynamic findBuilderResource(String path) {}
@@ -21,7 +21,7 @@ class LocalServerCacheBinderSetting {
   LocalServerClientConfig? lsClientConfig;
   Map<String, dynamic>? basicCache;
   bool unSupportLocalServer = false;
-  String baseDomain = "";
+  String baseDomain = '';
 
   void setConfig(LocalServerClientConfig config) {
     lsClientConfig = config;
@@ -49,7 +49,7 @@ class LocalServerCacheBinder implements LocalServerCacheBuilderProtocol {
   Map<String, dynamic>? get basicCache =>
       LocalServerCacheBinderSetting().basicCache;
 
-  /// 当前webview是否被禁止使用server
+  /// 当前WebView是否被禁止使用server
   bool get unSupportLocalServer =>
       LocalServerCacheBinderSetting().unSupportLocalServer;
 

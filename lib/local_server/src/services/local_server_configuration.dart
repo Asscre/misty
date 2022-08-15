@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:misty/tools/local_server_binder.dart';
+import 'package:misty/local_server/tools/local_server_binder.dart';
 import 'package:path_provider/path_provider.dart';
 
 /// 本地文件缓存目录管理
@@ -64,8 +64,8 @@ class LocalServerConfiguration {
   }
 
   /// 检查当前项目是否已经存在
-  static Future<bool> checkZipPathDirectoryIsExist(String zippurl) async {
-    String zipTmpPath = base64Encode(utf8.encode(zippurl));
+  static Future<bool> checkZipPathDirectoryIsExist(String zipUrl) async {
+    String zipTmpPath = base64Encode(utf8.encode(zipUrl));
     final dist = await getDistDirectory();
     String zipPath = '${dist.path}/$zipTmpPath';
     final checkDirect = Directory(zipPath);
@@ -92,7 +92,7 @@ class LocalServerConfiguration {
   }
 
   /// 处理为完整的下载downloadUrl
-  /// 必须配置 [LocalServerCacheBinderSetting.instance.baseDomain]
+  /// 必须配置 [LocalServerCacheBinderSetting.baseDomain]
   static String downloadUrl(String url) {
     String downUrl = url;
     if (!downUrl.startsWith('http') && !downUrl.startsWith('https')) {

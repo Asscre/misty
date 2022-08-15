@@ -8,12 +8,12 @@ class MistyHandler extends LocalServerClientManager {
   void initSetting(MistyStartModel params) {
     init();
     LocalServerCacheBinderSetting().setBaseHost(params.baseHost);
-    Map<String, Map<String, String>> baCache = {
-      'common': {
-        'compress': params.compress,
-        'version': params.version,
-      },
-    };
+    // Map<String, Map<String, String>> baCache = {
+    //   'common': {
+    //     'compress': params.compress,
+    //     'version': params.version,
+    //   },
+    // };
     Map<String, dynamic> assets = {};
     params.assets
         .map(
@@ -26,16 +26,9 @@ class MistyHandler extends LocalServerClientManager {
     });
     LocalServerClientConfig localServerClientConfig =
         LocalServerClientConfig.fromJson({
-      'option': [
-        {
-          'key': params.key,
-          'open': params.open,
-          'priority': params.priority,
-          'version': params.version,
-        },
-      ],
+      'option': params.options.map((e) => e.toJson()).toList(),
       'assets': assets,
-      'basics': baCache,
+      'basics': params.basics.toJson(),
     });
     prepareManager(localServerClientConfig);
     startLocalServer();

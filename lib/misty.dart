@@ -1,22 +1,22 @@
 library misty;
 
 import 'package:flutter/material.dart';
+import 'package:misty/local_server/src/model/misty_start_model.dart';
 import 'package:misty/misty_handler.dart';
 import 'package:misty/misty_view.dart';
-import 'package:misty/src/model/misty_start_model.dart';
 
-export 'package:misty/src/model/download_service_item.dart';
-export 'package:misty/src/model/download_service_total_asset_item.dart';
-export 'package:misty/src/model/local_server_client_config.dart';
-export 'package:misty/src/model/local_server_client_config_item.dart';
-export 'package:misty/src/model/misty_start_model.dart';
-export 'package:misty/src/services/local_server_configuration.dart';
-export 'package:misty/src/services/local_server_service.dart';
-export 'package:misty/tools/local_server_binder.dart';
-export 'package:misty/tools/local_server_config_cache.dart';
-export 'package:misty/tools/local_server_downloader.dart';
-export 'package:misty/tools/local_server_manager.dart';
-export 'package:misty/tools/local_server_status_handler.dart';
+export 'package:misty/local_server/src/model/download_service_item.dart';
+export 'package:misty/local_server/src/model/download_service_total_asset_item.dart';
+export 'package:misty/local_server/src/model/local_server_client_config.dart';
+export 'package:misty/local_server/src/model/local_server_client_config_item.dart';
+export 'package:misty/local_server/src/model/misty_start_model.dart';
+export 'package:misty/local_server/src/services/local_server_configuration.dart';
+export 'package:misty/local_server/src/services/local_server_service.dart';
+export 'package:misty/local_server/tools/local_server_binder.dart';
+export 'package:misty/local_server/tools/local_server_config_cache.dart';
+export 'package:misty/local_server/tools/local_server_downloader.dart';
+export 'package:misty/local_server/tools/local_server_manager.dart';
+export 'package:misty/local_server/tools/local_server_status_handler.dart';
 
 class Misty {
   /// Misty start in Flutter init
@@ -25,7 +25,7 @@ class Misty {
   }
 
   /// open misty app
-  void openMisty(BuildContext context, String assetsUrl) {
+  static void openMisty(BuildContext context, String assetsUrl) {
     Navigator.of(context).push(
       PageRouteBuilder(
         pageBuilder: (context, animation, secondaryAnimation) {
