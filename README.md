@@ -1,12 +1,58 @@
-# Misty - a Flutter miniapp solution.
+# Misty - 一个Flutter web项目的本地缓存解决方案.
 
-By intercepting browser network requests, reading local resource files, 
-reducing network resource requests, and improving the opening speed of web pages, 
-a Flutter miniapp solution that interacts with Flutter's native gestures is realized.
+通过拦截浏览器网络请求，读取本地资源文件，减少网络资源请求来提高网页的开启速度，实现Flutter的原生手势交互的Flutter web preload解决方案。
 
-## Project architecture design
+Misty，如名所示，通过极小的引用实现web项目在Flutter上面享受到小程序的体验。
 
-- [] Web assets manager (Version manager, Assets download handle)
+## 使用
+
+- 导入
+- 启动本地web服务
+```dart
+  MistyStartModel mistyStartOption = MistyStartModel(
+    baseHost: 'https://mistyapp.oss-cn-hangzhou.aliyuncs.com',
+    options: [
+      Option(
+        key: 'misty-app-one',
+        open: 1,
+        priority: 0,
+        version: '202208161155',
+      ),
+      Option(
+        key: 'misty-app-two',
+        open: 1,
+        priority: 0,
+        version: '202208151527',
+      ),
+    ],
+    basics: Basics(
+      common: Common(
+        compress: '/common.zip',
+        version: '202208151527',
+      ),
+    ),
+    assets: [
+      {
+        'misty-app-one': '/misty-app-one/misty-app.zip',
+      },
+      {
+        'misty-app-two': '/misty-app-two/misty-app.zip',
+      },
+    ],
+  );
+
+  Misty.start(mistyStartOption);
+```
+- 使用
+```dart
+  Misty.openMisty(context, url);
+```
+
+- 展示
+
+## 项目设计规划
+
+- [X] Web assets manager (Version manager, Assets download handle)
 - [] WebView assets and web proxy (Assets local server)
 - [] Gesture interaction
 - [] Miniapp UI

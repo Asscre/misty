@@ -21,7 +21,7 @@ class _MyAppState extends State<MyApp> {
         key: 'misty-app-one',
         open: 1,
         priority: 0,
-        version: '202208151731',
+        version: '202208161155',
       ),
       Option(
         key: 'misty-app-two',
