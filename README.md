@@ -6,12 +6,12 @@ Misty，如名所示，通过极小的引用实现web项目在Flutter上面享�
 
 ## 使用
 
-#### 导入(pubspec.yaml)
+### 1. 导入(pubspec.yaml)
 ```
   dependencies:
     misty: <latest_version>
 ```
-#### 启动本地web服务
+### 2. 启动本地web服务
 ```dart
   MistyStartModel mistyStartOption = MistyStartModel(
     baseHost: 'https://mistyapp.oss-cn-hangzhou.aliyuncs.com',
@@ -47,13 +47,16 @@ Misty，如名所示，通过极小的引用实现web项目在Flutter上面享�
 
   Misty.start(mistyStartOption);
 ```
-#### 使用
+### 3. 使用
 ```dart
   Misty.openMisty(context, url);
 ```
 
-#### 展示
+## 展示
 ![Screenrecorder-2022-08-16-14-44-36-552 mp4](https://user-images.githubusercontent.com/42698881/184816047-2647762e-2389-4b61-963a-ab40190771b4.gif)
+
+ - web项目引用： [vite-vue3-template](https://github.com/Asscre/vite-vue3-template)
+               [misty-app](https://github.com/Asscre/misty-app)
 
 ## 项目设计规划
 
