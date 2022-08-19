@@ -2,11 +2,12 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:misty/local_server/tools/local_server_binder.dart';
+import 'package:misty/misty_event_controller.dart';
 import 'package:misty/misty_handler.dart';
 import 'package:misty/navigation/navigation_handler.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-import 'common/basis_scaffold.dart';
+import 'basis_scaffold.dart';
 
 class MistyView extends StatefulWidget {
   const MistyView({Key? key, required this.assetsUrl}) : super(key: key);
@@ -26,6 +27,15 @@ class _MistyViewState extends State<MistyView> {
   String _innerUrl = '';
   String _title = '';
   bool pageIsOk = false;
+  GlobalKey webKey = GlobalKey();
+  JavascriptChannel _javascriptChannel(BuildContext context) {
+    return JavascriptChannel(
+      name: 'MistyCallFlutter',
+      onMessageReceived: (JavascriptMessage msg) {
+        MistyEventController().onEventMessage(msg);
+      },
+    );
+  }
 
   @override
   void initState() {
@@ -53,19 +63,15 @@ class _MistyViewState extends State<MistyView> {
     );
   }
 
-  // Widget _loadingWidget() {
-  //   return const Center(
-  //     child: CircularProgressIndicator(),
-  //   );
-  // }
-
   Widget _bodyWidget() {
     return SizedBox(
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
       child: WebView(
+        key: webKey,
         initialUrl: _innerUrl,
-        debuggingEnabled: true,
+        debuggingEnabled: false,
+        zoomEnabled: false,
         onPageStarted: (url) {
           log("onPageStarted($url) ----------------------");
           log('Web开始加载：${DateTime.now()}', name: 'web-time');
@@ -79,11 +85,10 @@ class _MistyViewState extends State<MistyView> {
             });
           });
           webViewController!.getTitle().then((value) {
-            if (value != null) {
+            if (value != null && _title != value) {
               setState(() {
                 _title = value;
               });
-              print('======$value');
             }
           });
         },
@@ -94,6 +99,9 @@ class _MistyViewState extends State<MistyView> {
         navigationDelegate: (NavigationRequest request) {
           NavigationHandler.fwToFlutter(context, request.url);
           return NavigationDecision.prevent;
+        },
+        javascriptChannels: <JavascriptChannel>{
+          _javascriptChannel(context),
         },
       ),
     );

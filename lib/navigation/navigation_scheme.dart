@@ -6,11 +6,11 @@
 /// [fw] ==> form web
 class NavigationScheme {
   /// 打开新的页面
-  static String openPage = 'fw://openPage';
+  static const String openPage = 'fw://openPage';
 
   /// 打开Misty新的页面
-  static String openMistyPage = 'fw://openMistyPage';
+  static const String openMistyPage = 'fw://openMistyPage';
 
   /// 打开弹窗
-  static String openDialog = 'fw://openDialog';
+  static const String openDialog = 'fw://openDialog';
 }

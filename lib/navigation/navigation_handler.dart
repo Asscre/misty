@@ -2,35 +2,64 @@ import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:misty/common/basis_scaffold.dart';
+import 'package:misty/misty.dart';
 import 'package:misty/navigation/navigation_scheme.dart';
 
 class NavigationHandler {
   static fwToFlutter(BuildContext context, String scheme) {
     log(scheme);
-    if (scheme.startsWith(NavigationScheme.openPage)) {
-      _openPage(context, scheme);
-    } else if (scheme.startsWith(NavigationScheme.openPage)) {
-      _openDialog(context, scheme);
+    FWParamModel data = FWParamModel.toJson(scheme);
+    switch (data.scheme) {
+      case NavigationScheme.openPage:
+        _openPage(context, data);
+        break;
+      case NavigationScheme.openDialog:
+        _openDialog(context, data);
+        break;
+      case NavigationScheme.openMistyPage:
+        _openMistyPage(context, data);
+        break;
     }
   }
 
-  static _openPage(BuildContext context, String scheme) {
-    print(scheme);
-    // Misty.openMisty(
-    //   context,
-    //   'https://mistyapp.oss-cn-hangzhou.aliyuncs.com/misty-app-one/index.html',
-    // );
+  static _openPage(BuildContext context, FWParamModel param) {
+    String txt = param.params.toString();
     Navigator.push(
       context,
       CupertinoPageRoute(
-        builder: (_) => const BasisScaffold(
-          body: Text('openPage'),
+        builder: (_) => BasisScaffold(
+          body: Text(txt),
         ),
       ),
     );
   }
 
-  static _openDialog(BuildContext context, String scheme) {
-    print(scheme);
+  static _openDialog(BuildContext context, FWParamModel param) {}
+
+  static _openMistyPage(BuildContext context, FWParamModel param) {
+    Misty.openMisty(context, param.params!['url']);
+  }
+}
+
+class FWParamModel {
+  late String scheme;
+  Map<String, dynamic>? params;
+
+  FWParamModel({this.scheme = '', this.params});
+
+  FWParamModel.toJson(String schemeStr) {
+    int schemeIdx = schemeStr.indexOf('?');
+    if (schemeIdx == -1) {
+      scheme = schemeStr;
+    } else {
+      params = {};
+      scheme = schemeStr.substring(0, schemeIdx);
+      List<String> p =
+          schemeStr.substring(schemeIdx + 1, schemeStr.length).split('&');
+      for (String j in p) {
+        List<String> d = j.split('=');
+        params?.addAll({d[0]: d[1]});
+      }
+    }
   }
 }
