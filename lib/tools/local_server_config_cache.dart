@@ -2,9 +2,9 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/foundation.dart';
-import 'package:misty/local_server/src/model/download_service_item.dart';
-import 'package:misty/local_server/src/model/download_service_total_asset_item.dart';
-import 'package:misty/local_server/src/model/local_server_client_config_item.dart';
+import 'package:misty/model/download_service_item.dart';
+import 'package:misty/model/download_service_total_asset_item.dart';
+import 'package:misty/model/local_server_client_config_item.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// 相应的配置本地存储

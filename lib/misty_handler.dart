@@ -1,6 +1,6 @@
 import 'misty.dart';
 
-class MistyHandler extends LocalServerClientManager {
+class MistyHandler extends LocalServerManager {
   factory MistyHandler() => _instance ??= MistyHandler._internal();
   static MistyHandler? _instance;
   MistyHandler._internal();

@@ -1,5 +1,5 @@
-import 'package:misty/local_server/src/model/download_service_item.dart';
-import 'package:misty/local_server/src/services/local_server_configuration.dart';
+import 'package:misty/model/download_service_item.dart';
+import 'package:misty/services/local_server_configuration.dart';
 
 class DownloadServiceTotalAssetItem {
   String h5Path = '';

@@ -2,14 +2,13 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
-import 'package:misty/local_server/src/model/download_service_item.dart';
-import 'package:misty/local_server/src/model/download_service_total_asset_item.dart';
-import 'package:misty/local_server/src/model/local_server_client_config_item.dart';
-import 'package:misty/local_server/src/services/local_server_configuration.dart';
-import 'package:misty/local_server/tools/local_server_config_cache.dart';
-import 'package:misty/local_server/tools/local_server_downloader.dart';
+import 'package:misty/model/download_service_item.dart';
+import 'package:misty/model/download_service_total_asset_item.dart';
+import 'package:misty/model/local_server_client_config_item.dart';
+import 'package:misty/services/local_server_configuration.dart';
+import 'package:misty/tools/local_server_config_cache.dart';
+import 'package:misty/tools/local_server_downloader.dart';
 
-/// 解析config，并自动触发相应的下载任务
 class LocalServerClientConfig {
   String key = 'local_server_config';
 

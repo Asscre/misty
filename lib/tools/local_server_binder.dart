@@ -1,9 +1,9 @@
 import 'dart:io';
 
-import 'package:misty/local_server/src/model/download_service_total_asset_item.dart';
-import 'package:misty/local_server/src/model/local_server_client_config.dart';
-import 'package:misty/local_server/src/services/local_server_configuration.dart';
-import 'package:misty/local_server/src/services/local_server_service.dart';
+import 'package:misty/model/download_service_total_asset_item.dart';
+import 'package:misty/model/local_server_client_config.dart';
+import 'package:misty/services/local_server_configuration.dart';
+import 'package:misty/services/local_server_service.dart';
 
 abstract class LocalServerCacheBuilderProtocol {
   dynamic findBuilderResource(String path) {}

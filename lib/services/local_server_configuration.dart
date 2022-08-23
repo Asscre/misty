@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:misty/local_server/tools/local_server_binder.dart';
+import 'package:misty/tools/local_server_binder.dart';
 import 'package:path_provider/path_provider.dart';
 
 /// 本地文件缓存目录管理

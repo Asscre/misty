@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:misty/local_server/tools/local_server_binder.dart';
+import 'package:misty/tools/local_server_binder.dart';
 import 'package:misty/misty_event_controller.dart';
 import 'package:misty/misty_handler.dart';
 import 'package:misty/navigation/navigation_handler.dart';

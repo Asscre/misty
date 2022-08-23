@@ -1,4 +1,4 @@
-import 'package:misty/local_server/src/services/local_server_configuration.dart';
+import 'package:misty/services/local_server_configuration.dart';
 
 /// zip下载状态
 enum LoadStateType {
