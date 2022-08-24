@@ -59,7 +59,7 @@ Misty，如名所示，通过极小的引用实现web项目在Flutter上面享�
     MistyHandler().callJs('欢迎使用Misty！');
 ```
 
->>> Js 挂载 事件
+> Js 挂载 事件
 ```javascript
     function flutterCallJs(param : any) {
         console.log(param);
@@ -81,7 +81,7 @@ Misty，如名所示，通过极小的引用实现web项目在Flutter上面享�
 ```
 
 ## 展示
-![Screenrecorder-2022-08-16-14-44-36-552 mp4](https://user-images.githubusercontent.com/42698881/184816047-2647762e-2389-4b61-963a-ab40190771b4.gif)
+![Screenrecorder-2022-08-24-16-51-42-559 mp4](https://user-images.githubusercontent.com/42698881/186375888-1ea2fafd-dbe7-4b13-b4c9-b2f61e49860e.gif)
 
 Misty’s [官方demo](https://github.com/Asscre/misty-app") 帮助你快速了解如何集成属于你自己的Flutter小程序功能.
 
@@ -102,5 +102,7 @@ Misty’s [官方demo](https://github.com/Asscre/misty-app") 帮助你快速了�
 - ⭕️  其次是 其他定制化
 
 ## 支持 Misty
+如果觉得Misty帮助到您，请支持一杯☕️呗！
+![WechatPay 1cc5a956](https://user-images.githubusercontent.com/42698881/186375976-b1010cd5-3134-4ca8-b2db-8bc92499718d.jpeg)
 
 ## MIT License
