@@ -102,7 +102,8 @@ Misty’s [官方demo](https://github.com/Asscre/misty-app") 帮助你快速了�
 - ⭕️  其次是 其他定制化
 
 ## 支持 Misty
-如果觉得Misty帮助到您，请支持一杯☕️呗！
-![WechatPay 1cc5a956](https://user-images.githubusercontent.com/42698881/186375976-b1010cd5-3134-4ca8-b2db-8bc92499718d.jpeg)
+> 如果觉得Misty帮助到您，请支持一杯☕️呗！
+
+<img src="https://user-images.githubusercontent.com/42698881/186375976-b1010cd5-3134-4ca8-b2db-8bc92499718d.jpeg" width="200px">
 
 ## MIT License
