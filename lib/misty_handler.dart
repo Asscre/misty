@@ -1,9 +1,15 @@
-import 'misty.dart';
+import 'package:misty/model/local_server_client_config.dart';
+import 'package:misty/model/misty_start_model.dart';
+import 'package:misty/tools/local_server_binder.dart';
+import 'package:misty/tools/local_server_manager.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class MistyHandler extends LocalServerManager {
   factory MistyHandler() => _instance ??= MistyHandler._internal();
   static MistyHandler? _instance;
   MistyHandler._internal();
+
+  WebViewController? _webViewController;
 
   void initSetting(MistyStartModel params) {
     init();
@@ -26,5 +32,13 @@ class MistyHandler extends LocalServerManager {
     });
     prepareManager(localServerClientConfig);
     startLocalServer();
+  }
+
+  void setWebViewController(WebViewController webViewController) {
+    _webViewController = webViewController;
+  }
+
+  void callJs(dynamic params) {
+    _webViewController?.runJavascript("flutterCallJs('${params.toString()}')");
   }
 }

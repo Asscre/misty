@@ -48,41 +48,59 @@ Misty，如名所示，通过极小的引用实现web项目在Flutter上面享�
   Misty.start(mistyStartOption);
 ```
 ### 3. 使用
+
+#### 打开程序
 ```dart
   Misty.openMisty(context, url);
+```
+
+#### Flutter 调用 Js
+```dart
+    MistyHandler().callJs('欢迎使用Misty！');
+```
+
+>>> Js 挂载 事件
+```javascript
+    function flutterCallJs(param : any) {
+        console.log(param);
+    }
+    
+    window.flutterCallJs = flutterCallJs;
+```
+
+#### Js 调用 Flutter
+```javascript
+    window.MistyCallFlutter.postMessage('getDataFormFlutter');
+```
+
+```dart
+    /// 监听来自Web的消息
+    MistyEventController().addEventListener((event) {
+      print(event);
+    });
 ```
 
 ## 展示
 ![Screenrecorder-2022-08-16-14-44-36-552 mp4](https://user-images.githubusercontent.com/42698881/184816047-2647762e-2389-4b61-963a-ab40190771b4.gif)
 
- - web项目引用： [vite-vue3-template](https://github.com/Asscre/vite-vue3-template)
-               [misty-app](https://github.com/Asscre/misty-app)
+Misty’s [官方demo](https://github.com/Asscre/misty-app") 帮助你快速了解如何集成属于你自己的Flutter小程序功能.
+
+- web项目引用： [vite-vue3-template](https://github.com/Asscre/vite-vue3-template)
+              [misty-app](https://github.com/Asscre/misty-app)
 
 ## 项目设计规划
+- ✅ Web 资源管理器 (版本管理，资源下载管理)
+- ✅ WebView 资源和网络代理
+- ✅️ Flutter 与 Web 项目原生交互
+- ☑️ Misty UI框架，帮助快速搭建 Misty 程序
 
-- [X] Web assets manager (Version manager, Assets download handle)
-- [] WebView assets and web proxy (Assets local server)
-- [] Gesture interaction
-- [] Miniapp UI
+
+## 持续更新
+为了保证正常版本更新和迭代，😁更新迭代的规则如下：
+- ⭕️  优先 版本开发 和 修复 BUG
+- ⭕️  然后是 需求榜
+- ⭕️  其次是 其他定制化
+
+## 支持 Misty
 
 ## MIT License
-
-Copyright (c) 2022 Asscre
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.

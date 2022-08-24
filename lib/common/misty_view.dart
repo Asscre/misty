@@ -1,17 +1,18 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:misty/tools/local_server_binder.dart';
 import 'package:misty/misty_event_controller.dart';
 import 'package:misty/misty_handler.dart';
+import 'package:misty/model/misty_view_model.dart';
 import 'package:misty/navigation/navigation_handler.dart';
+import 'package:misty/tools/local_server_binder.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import 'basis_scaffold.dart';
 
 class MistyView extends StatefulWidget {
-  const MistyView({Key? key, required this.assetsUrl}) : super(key: key);
-  final String assetsUrl;
+  const MistyView({Key? key, required this.params}) : super(key: key);
+  final MistyViewModel params;
 
   @override
   State<MistyView> createState() => _MistyViewState();
@@ -32,7 +33,7 @@ class _MistyViewState extends State<MistyView> {
     return JavascriptChannel(
       name: 'MistyCallFlutter',
       onMessageReceived: (JavascriptMessage msg) {
-        MistyEventController().onEventMessage(msg);
+        MistyEventController().onEventMessage(msg.message);
       },
     );
   }
@@ -43,7 +44,7 @@ class _MistyViewState extends State<MistyView> {
     _localServerBuilder = LocalServerCacheBinder()..initBinder();
     MistyHandler().registerBuilder(_localServerBuilder);
     _innerUrl =
-        _localServerBuilder.convertH5Url2LocalServerUrl(widget.assetsUrl);
+        _localServerBuilder.convertH5Url2LocalServerUrl(widget.params.url);
     super.initState();
   }
 
@@ -93,6 +94,7 @@ class _MistyViewState extends State<MistyView> {
           });
         },
         onWebViewCreated: (controller) async {
+          MistyHandler().setWebViewController(controller);
           webViewController = controller;
         },
         javascriptMode: JavascriptMode.unrestricted,

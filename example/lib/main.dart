@@ -27,7 +27,7 @@ class _MyAppState extends State<MyApp> {
         key: 'misty-app-two',
         open: 1,
         priority: 0,
-        version: '202208191703',
+        version: '202208241529',
       ),
     ],
     basics: Basics(
@@ -49,9 +49,6 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     Misty.start(mistyStartOption);
-    MistyEventController().addEventListener((event) {
-      print(event);
-    });
     super.initState();
   }
 
