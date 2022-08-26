@@ -1,36 +1,44 @@
 import 'package:flutter/material.dart';
+import 'package:misty/model/misty_view_model.dart';
 
 class BasisScaffold extends StatelessWidget {
-  const BasisScaffold({Key? key, this.title, this.leading, this.body})
-      : super(key: key);
-  final String? title;
-  final Widget? leading;
-  final Widget? body;
+  const BasisScaffold({
+    Key? key,
+    required this.title,
+    required this.mistyViewParams,
+    required this.body,
+  }) : super(key: key);
+  final String title;
+  final MistyViewModel mistyViewParams;
+  final Widget body;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _appBarWidget(context),
+      appBar: mistyViewParams.showBar ? _appBarWidget(context) : null,
       body: body,
+      bottomNavigationBar: mistyViewParams.bottomNav,
     );
   }
 
-  PreferredSizeWidget _appBarWidget(BuildContext context) {
-    return AppBar(
-      backgroundColor: Colors.blue,
-      elevation: 0,
-      leading: leading ?? const BackButton(),
-      title: Text(
-        title ?? '',
-        maxLines: 1,
-        overflow: TextOverflow.ellipsis,
-      ),
-      centerTitle: true,
-      actions: [
-        _tabMakeWidget(context),
-        const SizedBox(width: 12),
-      ],
-    );
+  PreferredSizeWidget? _appBarWidget(BuildContext context) {
+    return mistyViewParams.showBar
+        ? AppBar(
+            backgroundColor: Colors.blue,
+            elevation: 0,
+            leading: const SizedBox(),
+            title: Text(
+              mistyViewParams.showTitle ? mistyViewParams.title ?? title : '',
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+            centerTitle: true,
+            actions: [
+              _tabMakeWidget(context),
+              const SizedBox(width: 12),
+            ],
+          )
+        : null;
   }
 
   Widget _tabMakeWidget(BuildContext context) {
@@ -45,23 +53,14 @@ class BasisScaffold extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            GestureDetector(
-              onTap: () {},
-              child: const SizedBox(
-                width: 38,
-                height: 38,
-                child: Icon(
-                  Icons.more_horiz,
-                  color: Colors.white,
-                  size: 24,
-                ),
-              ),
-            ),
-            Container(
-              height: 15,
-              width: 1,
-              color: Colors.white38,
-            ),
+            _moreWidget(),
+            mistyViewParams.showMoreBtn
+                ? Container(
+                    height: 15,
+                    width: 1,
+                    color: Colors.white38,
+                  )
+                : const SizedBox(),
             _closePage(context),
           ],
         ),
@@ -69,17 +68,31 @@ class BasisScaffold extends StatelessWidget {
     );
   }
 
+  Widget _moreWidget() {
+    return mistyViewParams.showMoreBtn
+        ? GestureDetector(
+            onTap: () {
+              mistyViewParams.moreFunc?.call();
+            },
+            child: Container(
+              width: 38,
+              height: 38,
+              color: Colors.transparent,
+              child: const Icon(
+                Icons.more_horiz,
+                color: Colors.white,
+                size: 24,
+              ),
+            ),
+          )
+        : const SizedBox();
+  }
+
   Widget _closePage(BuildContext context) {
     return GestureDetector(
       onTap: () {
         // 返回到首页
-        Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(
-            builder: (_) => const SizedBox(),
-          ),
-          (route) => route.isFirst,
-        );
+        mistyViewParams.closeFunc?.call();
         Navigator.pop(context);
       },
       child: Container(

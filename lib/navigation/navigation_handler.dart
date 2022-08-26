@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
-import 'package:misty/common/basis_scaffold.dart';
+import 'package:flutter/material.dart';
 import 'package:misty/misty.dart';
 import 'package:misty/navigation/navigation_scheme.dart';
 
@@ -27,7 +27,7 @@ class NavigationHandler {
     Navigator.push(
       context,
       CupertinoPageRoute(
-        builder: (_) => BasisScaffold(
+        builder: (_) => Scaffold(
           body: Text(txt),
         ),
       ),

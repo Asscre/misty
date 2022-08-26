@@ -14,7 +14,7 @@ class MistyViewModel {
   String? title;
 
   /// 是否显示更多按钮
-  bool? showMoreBtn;
+  bool showMoreBtn;
 
   /// 更多按钮事件
   Function? moreFunc;
@@ -25,14 +25,22 @@ class MistyViewModel {
   /// 底部导航Widget，默认为null，不显示
   Widget? bottomNav;
 
+  /// logo 默认为misty Icon, 用于资源首次加载时加载效果
+  Widget? logo;
+
+  /// loading time 默认为2秒，logo到打开页面展示的时间
+  int? milliseconds;
+
   MistyViewModel({
     required this.url,
-    this.showBar = true,
-    this.showTitle = true,
+    this.showBar = false,
+    this.showTitle = false,
     this.title,
-    this.showMoreBtn,
+    this.showMoreBtn = true,
     this.moreFunc,
     this.closeFunc,
     this.bottomNav,
+    this.logo,
+    this.milliseconds,
   });
 }
