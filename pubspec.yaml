@@ -1,7 +1,7 @@
 name: misty
-description: Misty - a Flutter miniapp solution.
-version: 0.0.1
-homepage:
+description: Misty - 一个Flutter web项目的本地缓存解决方案.
+version: 0.1.0
+homepage: https://github.com/Asscre/misty
 
 environment:
   sdk: ">=2.17.6 <3.0.0"

@@ -1,3 +1,11 @@
+## 1.0.1
+
+* 解决 Misty 在IOS中显示异常的问题 09-02 2022
+
+## 1.0.0
+
+* 完成Misty基础开发
+
 ## 0.0.1
 
-* TODO: Describe initial release.
+* 添加本地文件服务
