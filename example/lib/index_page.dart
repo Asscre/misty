@@ -45,6 +45,13 @@ class _IndexPageState extends State<IndexPage> {
               'https://mistyapp.oss-cn-hangzhou.aliyuncs.com/misty-app-two/index.html',
               '打开小程序two',
             ),
+            // SizedBox(
+            //   height: 300,
+            //   width: MediaQuery.of(context).size.width,
+            //   child: const WebView(
+            //     initialUrl: 'www.baidu.com',
+            //   ),
+            // ),
           ],
         ),
       ),
@@ -65,29 +72,29 @@ class _IndexPageState extends State<IndexPage> {
           closeFunc: () {
             print('close Function');
           },
-          logo: Container(
-            height: 110,
-            width: 110,
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(90),
-              boxShadow: const [
-                BoxShadow(
-                  color: Colors.black12,
-                  blurRadius: 0.1,
-                  spreadRadius: 0.2,
-                  offset: Offset(0, 2),
-                ),
-              ],
-            ),
-            child: const Text(
-              'Misty',
-              style: TextStyle(
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ),
+          // logo: Container(
+          //   height: 110,
+          //   width: 110,
+          //   alignment: Alignment.center,
+          //   decoration: BoxDecoration(
+          //     color: Colors.white,
+          //     borderRadius: BorderRadius.circular(90),
+          //     boxShadow: const [
+          //       BoxShadow(
+          //         color: Colors.black12,
+          //         blurRadius: 0.1,
+          //         spreadRadius: 0.2,
+          //         offset: Offset(0, 2),
+          //       ),
+          //     ],
+          //   ),
+          //   child: const Text(
+          //     'Misty',
+          //     style: TextStyle(
+          //       fontWeight: FontWeight.w600,
+          //     ),
+          //   ),
+          // ),
         ),
       ),
       child: Text(name),
@@ -126,6 +133,6 @@ class _IndexPageState extends State<IndexPage> {
   }
 
   void _getDataFormFlutter() {
-    MistyHandler().callJs('欢迎使用Misty！');
+    MistyHandler().callJs('欢迎使用Misty！${DateTime.now().toLocal()}');
   }
 }

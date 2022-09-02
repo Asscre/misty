@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
@@ -25,6 +26,7 @@ class _MistyViewState extends State<MistyView> {
   // Local server 管理
   late LocalServerCacheBinder _localServerBuilder;
   WebViewController? webViewController;
+
   String _innerUrl = '';
   String _title = '';
   bool pageIsOk = false;
@@ -140,7 +142,7 @@ class _MistyViewState extends State<MistyView> {
         javascriptMode: JavascriptMode.unrestricted,
         navigationDelegate: (NavigationRequest request) {
           NavigationHandler.fwToFlutter(context, request.url);
-          return NavigationDecision.prevent;
+          return NavigationDecision.navigate;
         },
         javascriptChannels: <JavascriptChannel>{
           _javascriptChannel(context),
