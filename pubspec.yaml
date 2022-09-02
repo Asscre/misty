@@ -1,6 +1,6 @@
 name: misty
 description: Misty - 一个Flutter web项目的本地缓存解决方案.
-version: 0.1.0
+version: 1.0.1
 homepage: https://github.com/Asscre/misty
 
 environment:
