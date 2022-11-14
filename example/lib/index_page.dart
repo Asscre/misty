@@ -45,6 +45,11 @@ class _IndexPageState extends State<IndexPage> {
               'https://mistyapp.oss-cn-hangzhou.aliyuncs.com/misty-app-two/index.html',
               '打开小程序two',
             ),
+            _openMistyView(
+              context,
+              'https://mistyapp.oss-cn-hangzhou.aliyuncs.com/misty-app-three/index.html#/article/12',
+              '打开小程序three',
+            ),
             // SizedBox(
             //   height: 300,
             //   width: MediaQuery.of(context).size.width,

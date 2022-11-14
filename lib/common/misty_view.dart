@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:misty/misty_event_controller.dart';
 import 'package:misty/misty_handler.dart';
 import 'package:misty/model/misty_view_model.dart';
-import 'package:misty/navigation/navigation_handler.dart';
 import 'package:misty/tools/local_server_binder.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
+import '../navigation/navigation_handler.dart';
 import 'basis_scaffold.dart';
 
 class MistyView extends StatefulWidget {
@@ -39,6 +39,7 @@ class _MistyViewState extends State<MistyView> {
     return JavascriptChannel(
       name: 'MistyCallFlutter',
       onMessageReceived: (JavascriptMessage msg) {
+        print('======${msg.message}');
         MistyEventController().onEventMessage(msg.message);
       },
     );
@@ -52,6 +53,7 @@ class _MistyViewState extends State<MistyView> {
     MistyHandler().registerBuilder(_localServerBuilder);
     _innerUrl =
         _localServerBuilder.convertH5Url2LocalServerUrl(widget.params.url);
+    print('_innerUrl: $_innerUrl');
     super.initState();
   }
 
@@ -96,12 +98,15 @@ class _MistyViewState extends State<MistyView> {
   }
 
   Widget _viewWidget() {
-    return SizedBox(
+    return Container(
+      color: Colors.black,
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
       child: WebView(
+        backgroundColor: Colors.transparent,
         key: webKey,
-        initialUrl: _innerUrl,
+        initialUrl:
+            'http://127.0.0.1:35685/misty-app-three/index.html#/article/12',
         debuggingEnabled: false,
         zoomEnabled: false,
         onPageStarted: (url) {

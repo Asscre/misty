@@ -335,19 +335,19 @@ class LocalServerDownloadService {
 
   Map<String, Set<DownloadServiceItem>> _convertToBucketList(
       List<DownloadServiceTotalAssetItem> assets) {
-    Map<String, Set<DownloadServiceItem>> _innerMap = {};
+    Map<String, Set<DownloadServiceItem>> innerMap = {};
     for (var totalAsset in assets) {
       for (var value in totalAsset.assets) {
-        Set? tmpZipBucket = _innerMap[value.zipUrl];
+        Set? tmpZipBucket = innerMap[value.zipUrl];
         if (tmpZipBucket == null) {
           Set<DownloadServiceItem> tmp = {}..add(value);
-          _innerMap[value.zipUrl] = tmp;
+          innerMap[value.zipUrl] = tmp;
         } else {
           tmpZipBucket.add(value);
         }
       }
     }
-    return _innerMap;
+    return innerMap;
   }
 
   void _preloadAssetsData(List<DownloadServiceTotalAssetItem> assets) {

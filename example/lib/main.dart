@@ -29,6 +29,12 @@ class _MyAppState extends State<MyApp> {
         priority: 0,
         version: '202208241529',
       ),
+      Option(
+        key: 'misty-app-three',
+        open: 1,
+        priority: 0,
+        version: '202210311707',
+      ),
     ],
     basics: Basics(
       common: Common(
@@ -42,6 +48,9 @@ class _MyAppState extends State<MyApp> {
       },
       {
         'misty-app-two': '/misty-app-two/dist.zip',
+      },
+      {
+        'misty-app-three': '/misty-app-three/dist.zip',
       },
     ],
   );

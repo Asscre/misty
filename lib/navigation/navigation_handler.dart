@@ -48,6 +48,7 @@ class FWParamModel {
   FWParamModel({this.scheme = '', this.params});
 
   FWParamModel.toJson(String schemeStr) {
+    print(schemeStr);
     int schemeIdx = schemeStr.indexOf('?');
     if (schemeIdx == -1) {
       scheme = schemeStr;
@@ -56,6 +57,9 @@ class FWParamModel {
       scheme = schemeStr.substring(0, schemeIdx);
       List<String> p =
           schemeStr.substring(schemeIdx + 1, schemeStr.length).split('&');
+      print(scheme);
+      print(p);
+      print(p.runtimeType);
       for (String j in p) {
         List<String> d = j.split('=');
         params?.addAll({d[0]: d[1]});
