@@ -39,7 +39,7 @@ class _MistyViewState extends State<MistyView> {
     return JavascriptChannel(
       name: 'MistyCallFlutter',
       onMessageReceived: (JavascriptMessage msg) {
-        print('======${msg.message}');
+        log('======${msg.message}');
         MistyEventController().onEventMessage(msg.message);
       },
     );
@@ -53,7 +53,7 @@ class _MistyViewState extends State<MistyView> {
     MistyHandler().registerBuilder(_localServerBuilder);
     _innerUrl =
         _localServerBuilder.convertH5Url2LocalServerUrl(widget.params.url);
-    print('_innerUrl: $_innerUrl');
+    log('_innerUrl: $_innerUrl');
     super.initState();
   }
 
@@ -105,8 +105,7 @@ class _MistyViewState extends State<MistyView> {
       child: WebView(
         backgroundColor: Colors.transparent,
         key: webKey,
-        initialUrl:
-            'http://127.0.0.1:35685/misty-app-three/index.html#/article/12',
+        initialUrl: _innerUrl,
         debuggingEnabled: false,
         zoomEnabled: false,
         onPageStarted: (url) {
